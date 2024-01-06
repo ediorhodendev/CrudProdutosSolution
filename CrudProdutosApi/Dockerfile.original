@@ -1,0 +1,32 @@
+# Estágio 1: Use a imagem base do .NET Core SDK 6.0 para construir o aplicativo
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+# Defina o diretório de trabalho dentro do contêiner
+WORKDIR /app
+
+# Copie o arquivo .csproj e restaurar as dependências
+COPY CrudProdutosApi/CrudProdutosApi.csproj./
+RUN dotnet restore
+
+# Copie todo o resto do código-fonte
+COPY . .
+
+# Compile o aplicativo
+RUN dotnet build -c Release -o build
+
+# Estágio 2: Publicar o aplicativo em uma imagem mínima do .NET Core 6.0
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS publish
+WORKDIR /app
+COPY --from=build /app/build .  # Copie os resultados da etapa anterior
+RUN dotnet publish -c Release -o publish
+
+# Estágio 3: Use uma imagem base ASP.NET Core 6.0 para executar o aplicativo
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+# Configurar variáveis de ambiente para a conexão com o banco de dados
+ENV ConnectionStrings__DefaultConnection="Server=sqlserver;Database=CrudProdutos;User=sa;Password=Senha@123;"
+
+# Defina a entrada padrão para a aplicação
+ENTRYPOINT ["dotnet", "CrudProdutosApi.dll"]
