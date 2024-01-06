@@ -32,7 +32,7 @@ namespace CrudProdutos.Infrastructure.Interfaces
         /// Atualiza um produto existente de forma assíncrona.
         /// </summary>
         /// <param name="produto">O produto atualizado.</param>
-        Task AtualizarProdutoAsync(Produto produto);
+        Task AtualizarProdutoAsync(int v, Produto produto);
 
         /// <summary>
         /// Atualiza um produto existente de forma assíncrona.

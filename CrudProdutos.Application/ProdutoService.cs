@@ -55,7 +55,7 @@ namespace CrudProdutos.Application.Services
             produtoExistente.Estoque = produto.Estoque;
             produtoExistente.Valor = produto.Valor;
 
-            await _produtoRepository.AtualizarProdutoAsync(produtoExistente);
+            await _produtoRepository.AtualizarProdutoAsync(1,produtoExistente);
         }
 
         public async Task<IEnumerable<Produto>> BuscarProdutosPorNomeAsync(string nome)

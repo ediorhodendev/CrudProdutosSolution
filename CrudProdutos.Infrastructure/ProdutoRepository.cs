@@ -46,7 +46,7 @@ namespace CrudProdutos.Infrastructure.Repositories
             return produto.Id;
         }
 
-        public async Task AtualizarProdutoAsync(Produto produto)
+        public async Task AtualizarProdutoAsync(int v, Produto produto)
         {
             if (produto == null)
             {
