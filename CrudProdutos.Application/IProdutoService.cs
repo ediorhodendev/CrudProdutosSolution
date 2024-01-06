@@ -10,9 +10,7 @@ namespace CrudProdutos.Application.Interfaces
         Task<Produto> ObterProdutoPorIdAsync(int id);
         Task<int> CriarProdutoAsync(Produto produto);
         Task AtualizarProdutoAsync(int id, Produto produto);
-
         Task<IEnumerable<Produto>> BuscarProdutosPorNomeAsync(string nome); // Novo método
-
         Task DeletarProdutoAsync(int id);
     }
 }
