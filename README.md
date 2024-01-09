@@ -29,13 +29,15 @@ A Solution consiste nos seguintes projetos:
 - Docker (para o banco de dados SQL Server).
 - Swagger/OpenAPI para documentação da API.
 - Testes unitários para garantir a qualidade do código.
+-  Testes de integração
 
 ## Configuração
 
 Certifique-se de configurar a string de conexão com o banco de dados SQL Server no arquivo `appsettings.json` do projeto `CrudProdutosApi`.
-
-
-
+ "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost,1450;Database=crudprodutos;User Id=sa;Password=Pedro@123;"
+  },
+Se necessário altera as portas. 
 ### Utilizando Docker e SQL Server
 
 Este projeto utiliza Docker para executar um contêiner do SQL Server. Siga as instruções abaixo:
@@ -44,8 +46,8 @@ Este projeto utiliza Docker para executar um contêiner do SQL Server. Siga as i
 
 2. **Execute o Contêiner do SQL Server**:
 
-   Execute o seguinte comando no terminal para baixar e iniciar um contêiner do SQL Server:
-
+   Execute o seguinte comando no terminal para baixar e iniciar um contêiner do SQL Server: na raiz do projeto execute o compando para criar as imagens no docker
+   
    docker-compose up
 
    
