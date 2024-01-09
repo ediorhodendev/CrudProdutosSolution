@@ -29,23 +29,23 @@ public class ProdutoServiceTestsMemoria : IDisposable
     [Fact]
     public async Task CriarProduto_DeveRetornarIdDoNovoProduto()
     {
-        // Arrange
+       
         var produtoRepositoryMock = new Mock<IProdutoRepository>();
         var produtoService = new ProdutoService(produtoRepositoryMock.Object);
 
         var novoProduto = new Produto { Nome = "Novo Produto", Estoque = 10, Valor = 100.0m };
 
-        // Act
+       
         var novoProdutoId = await produtoService.CriarProdutoAsync(novoProduto);
 
-        // Assert
+       
         Assert.NotEqual(0, novoProdutoId); // O ID deve ser diferente de zero
     }
 
     [Fact]
     public async Task ObterProdutoPorId_QuandoProdutoExiste_DeveRetornarProduto()
     {
-        // Arrange
+        
         var produtoRepositoryMock = new Mock<IProdutoRepository>();
         var produtoService = new ProdutoService(produtoRepositoryMock.Object);
 
@@ -89,7 +89,7 @@ public class ProdutoServiceTestsMemoria : IDisposable
 
     public void Dispose()
     {
-        // Limpe o contexto em memória após os testes
+        // Limpa o contexto em memória após os testes
         _dbContext.Database.EnsureDeleted();
         _dbContext.Dispose();
     }

@@ -75,13 +75,13 @@ public class ProdutoServiceTestsDocker : IDisposable
     [Fact]
     public async Task DeveObterProdutoPorIdCorretamente()
     {
-        // Arrange
+        
         var produtoExistenteId = 1;
 
-        // Act
+       
         var produto = await _produtoService.ObterProdutoPorIdAsync(produtoExistenteId);
 
-        // Assert
+        
         Assert.NotNull(produto);
         Assert.Equal(produtoExistenteId, produto.Id);
     }
@@ -89,13 +89,13 @@ public class ProdutoServiceTestsDocker : IDisposable
     [Fact]
     public async Task DeveCriarProdutoCorretamente()
     {
-        // Arrange
+        
         var novoProduto = new Produto { Nome = "Novo Produto", Estoque = 10, Valor = 100.0m };
 
-        // Act
+        
         var novoProdutoId = await _produtoService.CriarProdutoAsync(novoProduto);
 
-        // Assert
+        
         Assert.NotEqual(0, novoProdutoId);
     }
 
