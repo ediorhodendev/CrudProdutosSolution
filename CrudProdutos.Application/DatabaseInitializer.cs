@@ -23,23 +23,27 @@ public class DatabaseInitializer : IHostedService
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
+            // Verifique se o banco de dados existe; se não, crie-o
+            dbContext.Database.EnsureCreated();
+
             // Verifique se já existem produtos no banco de dados
             if (!dbContext.Produtos.Any())
             {
                 // Se não existirem produtos, adicione 5 produtos iniciais
                 dbContext.Produtos.AddRange(new[]
                 {
-                    new Produto { Nome = "Produto 1", Estoque = 10, Valor = 50.0m },
-                    new Produto { Nome = "Produto 2", Estoque = 20, Valor = 60.0m },
-                    new Produto { Nome = "Produto 3", Estoque = 15, Valor = 40.0m },
-                    new Produto { Nome = "Produto 4", Estoque = 30, Valor = 70.0m },
-                    new Produto { Nome = "Produto 5", Estoque = 25, Valor = 55.0m }
-                });
+                new Produto { Nome = "Produto 1", Estoque = 10, Valor = 50.0m },
+                new Produto { Nome = "Produto 2", Estoque = 20, Valor = 60.0m },
+                new Produto { Nome = "Produto 3", Estoque = 15, Valor = 40.0m },
+                new Produto { Nome = "Produto 4", Estoque = 30, Valor = 70.0m },
+                new Produto { Nome = "Produto 5", Estoque = 25, Valor = 55.0m }
+            });
 
                 await dbContext.SaveChangesAsync(cancellationToken);
             }
         }
     }
+
 
     public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 }

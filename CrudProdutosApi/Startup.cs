@@ -12,9 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace CrudProdutosApi
 {
@@ -42,12 +39,6 @@ namespace CrudProdutosApi
             // Configuração dos controllers da API
             services.AddControllers();
 
-            // Configuração do Swagger/OpenAPI
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de Produtos", Version = "v1" });
-            });
-
             // Adicione o serviço de migração do Entity Framework
             services.AddDbContext<AppDbContext>(options =>
             {
@@ -56,15 +47,28 @@ namespace CrudProdutosApi
 
             // Registra a classe de inicialização do banco de dados como um serviço
             services.AddHostedService<DatabaseInitializer>();
+
+            // Configuração do Swagger/OpenAPI
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de Produtos", Version = "v1" });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Configuração do Swagger em todos os ambientes
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API de Produtos v1"));
+
             if (env.IsDevelopment())
             {
-                // Configuração do Swagger apenas no ambiente de desenvolvimento
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API de Produtos v1"));
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
             // Obtenha um escopo de serviços para acessar o contexto do banco de dados
