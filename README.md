@@ -46,9 +46,31 @@ Este projeto utiliza Docker para executar um contêiner do SQL Server. Siga as i
 
 2. **Execute o Contêiner do SQL Server**:
 
-   Execute o seguinte comando no terminal para baixar e iniciar um contêiner do SQL Server: na raiz do projeto execute o compando para criar as imagens no docker
+   Execute o seguinte comando no terminal para baixar e iniciar um contêiner do SQL Server: na raiz do projeto execute o comando para criar as imagens no docker
    
    docker-compose up
+   Obs: verifique se o arquivo docker-compose.yml está na raiz do projeto.
+
+   Conteúdo do arquivo
+version: '3.9'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver-container
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pedro@123"
+      MSSQL_DBNAME: "crudprodutos"
+    ports:
+      - "1450:1433"
+    networks:
+      - crudprodutos-net
+    restart: unless-stopped
+
+networks:
+  crudprodutos-net:
+    driver: bridge
+
 
    
 
