@@ -46,9 +46,12 @@ Este projeto utiliza Docker para executar um contêiner do SQL Server. Siga as i
 
 2. **Execute o Contêiner do SQL Server**:
 
-   Execute o seguinte comando no terminal para baixar e iniciar um contêiner do SQL Server: na raiz do projeto execute o compando para criar as imagens no docker
+   Execute o seguinte comando no terminal para baixar e iniciar um contêiner do SQL Server: na raiz do projeto execute o comando para criar as imagens no docker
    
    docker-compose up
+   Obs: verifique se o arquivo docker-compose.yml está na raiz do projeto.
+
+
 
    
 
