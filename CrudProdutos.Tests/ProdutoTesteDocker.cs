@@ -49,9 +49,12 @@ public class ProdutoServiceTestsDocker : IDisposable
             // Adicionar alguns produtos de teste ao banco de dados
             dbContext.Produtos.AddRange(new[]
             {
-                new Produto { Id = 1, Nome = "Produto 1", Estoque = 10, Valor = 50.0m },
-                new Produto { Id = 2, Nome = "Produto 2", Estoque = 20, Valor = 60.0m },
-                new Produto { Id = 3, Nome = "Produto 3", Estoque = 15, Valor = 40.0m },
+                new Produto { Id = 1, Nome = "Produto 1", Estoque = 10, Valor = 55.0m },
+                new Produto { Id = 2, Nome = "Produto 2", Estoque = 20, Valor = 332.0m },
+                new Produto { Id = 3, Nome = "Produto 3", Estoque = 15, Valor = 725.0m },
+                new Produto { Id = 3, Nome = "Produto 4", Estoque = 15, Valor = 75.0m },
+                new Produto { Id = 3, Nome = "Produto 5", Estoque = 15, Valor = 72.0m },
+                new Produto { Id = 3, Nome = "Produto 6", Estoque = 15, Valor = 1725.0m },
             });
 
             dbContext.SaveChanges();

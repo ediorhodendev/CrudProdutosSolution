@@ -23,7 +23,7 @@ public class DatabaseInitializer : IHostedService
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            // Verifique se o banco de dados existe; se não, crie-o
+            // Verifique se o banco de dados existe; se não, crie um novo (crudprodutos)
             dbContext.Database.EnsureCreated();
 
             // Verifique se já existem produtos no banco de dados

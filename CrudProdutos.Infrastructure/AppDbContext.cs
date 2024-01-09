@@ -31,10 +31,10 @@ namespace CrudProdutos.Infrastructure.Data
                 entity.Property(p => p.Estoque).HasColumnName("Estoque").IsRequired();
                 entity.Property(p => p.Valor).HasColumnName("Valor").HasColumnType("decimal(18, 2)").IsRequired();
 
-                // Exemplo de configuração de índice
+                // configuração de índice
                 entity.HasIndex(p => p.Nome).IsUnique();
 
-                // Outras configurações de relacionamento podem ser adicionadas aqui
+                
             });
         }
     }
