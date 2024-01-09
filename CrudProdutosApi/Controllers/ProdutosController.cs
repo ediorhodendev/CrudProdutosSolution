@@ -111,5 +111,18 @@ namespace CrudProdutosApi.Controllers
                 return NotFound(e.Message);
             }
         }
+
+        [HttpGet("ordenar")]
+        public async Task<IActionResult> ListarProdutosOrdenados(string campo, bool crescente = true)
+        {
+            if (!Enum.TryParse<OrderByField>(campo, ignoreCase: true, out var orderByField))
+            {
+                return BadRequest("Campo de ordenação inválido.");
+            }
+
+            var produtos = await _produtoService.ListarProdutosOrdenadosAsync(orderByField, crescente);
+            return Ok(produtos);
+        }
+
     }
 }
